@@ -22,6 +22,7 @@ namespace NeuronNets
         double[,] W = new double[30, 30];
         int Y = 0;
         
+        
         double T = 0; // задаем Т
         double alpha = 0.5; //задаем скорость обучения
 
@@ -31,6 +32,8 @@ namespace NeuronNets
 
         public Form1()
         {
+            //b = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+
             InitializeComponent();
 
             for (int j = 0; j < 30; j++)
@@ -41,7 +44,7 @@ namespace NeuronNets
                     
                 }
             }
-
+            b = new Bitmap(pictureBox1.Width, pictureBox1.Height);
 
             int x = 7, y =20;
             //TextBox[] tb = new TextBox[20];
@@ -142,22 +145,24 @@ namespace NeuronNets
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
-        {
+        { 
+            
             //if (DoDraw)//рисование
-            {
-
-                if (DoDraw)
-                {
-                    prov = false; b = new Bitmap(pictureBox1.Width, pictureBox1.Height); //преобразования рисунка в изображение
-                    graf = Graphics.FromImage(b);
-                    Graphics grafpro = Graphics.FromImage(b);
-                    SolidBrush redBrush = new SolidBrush(Color.Black);//кисть рисования
-                    graf.FillEllipse(redBrush, e.X, e.Y, 10, 10);
-
+                SolidBrush redBrush = new SolidBrush(Color.Black);
+                
+                    if (DoDraw)
+                    {
+                        prov = false; 
+                       // b = new Bitmap(pictureBox1.Width, pictureBox1.Height); //преобразования рисунка в изображение
+                        graf = Graphics.FromImage(b);
+                      // Graphics grafpro = Graphics.FromImage(b);
+                       // SolidBrush redBrush = new SolidBrush(Color.Black);//кисть рисования
+                        graf.FillEllipse(redBrush, e.X, e.Y, 10, 10);
+                    }
                     pictureBox1.Image = b;
-                }
-
-            }
+                   // pictureBox1.Invalidate();
+                    
+            
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
