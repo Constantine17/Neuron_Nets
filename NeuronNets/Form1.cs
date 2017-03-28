@@ -23,16 +23,15 @@ namespace NeuronNets
         int Y = 0;
         
         
-        double T = 0; // задаем Т
+        double T = 0; // задаем Т (коефициент обучения сети)
         double alpha = 0.5; //задаем скорость обучения
 
-        double S = 0;
+        double S = 0; // результат 
 
         
 
         public Form1()
         {
-            //b = new Bitmap(pictureBox1.Width, pictureBox1.Height);
 
             InitializeComponent();
 
@@ -44,10 +43,9 @@ namespace NeuronNets
                     
                 }
             }
-            b = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            b = new Bitmap(pictureBox1.Width, pictureBox1.Height);// облать для рисования
 
             int x = 7, y =20;
-            //TextBox[] tb = new TextBox[20];
             for (int j=0; j<30;j++ )
             {
                 for (int i = 0; i < 30; i++)
@@ -58,7 +56,6 @@ namespace NeuronNets
                         Text = "0.5",
                         Size = new Size(24, 20)
                     };
-                    //бла-бла-бла
                     this.groupBox1.Controls.Add(tb[i, j]);
                     x += 25;
                 }
@@ -88,22 +85,12 @@ namespace NeuronNets
 
                 //Graphics g = Graphics.FromHwnd(panel1.Handle);
             }
-           // Graphics graf = pictureBox1.CreateGraphics();
-
-            //pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-           // Image bmp = pictureBox1.Image;
-            //graf = Graphics.FromImage(bmp);
-           // g.DrawLine(new Pen(Brushes.Black, 2f), 0, 20, 100, 20);
-           // pictureBox1.Image.Save("image.png", System.Drawing.Imaging.ImageFormat.Png);
-
 
             Bitmap savedBit = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             pictureBox1.DrawToBitmap(savedBit, pictureBox1.ClientRectangle);
 
            
-            //savedBit = (Bitmap)pictureBox1.Image;
-
-          //  Graphics graf = Graphics.FromImage(savedBit);
+            //  Graphics graf = Graphics.FromImage(savedBit);
             
             SaveFileDialog k = new SaveFileDialog();
             if (k.ShowDialog() == DialogResult.OK)
@@ -123,44 +110,37 @@ namespace NeuronNets
         }
 
 
-        bool DoDraw = false;
+        bool DoDraw = false; //отслеживания клика
 
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
             DoDraw = true;
         }
 
-
-
-
-
+        
+        
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            DoDraw = true; 
+            DoDraw = true;  // наличие клика
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            DoDraw = false;
+            DoDraw = false; // отсутствие клика
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
-        { 
-            
-            //if (DoDraw)//рисование
-                SolidBrush redBrush = new SolidBrush(Color.Black);
+        {
+
+            SolidBrush redBrush = new SolidBrush(Color.Black); //кисть рисования
                 
-                    if (DoDraw)
+                    if (DoDraw)//проверка наличия клика
                     {
-                        prov = false; 
-                       // b = new Bitmap(pictureBox1.Width, pictureBox1.Height); //преобразования рисунка в изображение
+                        prov = false; // пустое изображение
                         graf = Graphics.FromImage(b);
-                      // Graphics grafpro = Graphics.FromImage(b);
-                       // SolidBrush redBrush = new SolidBrush(Color.Black);//кисть рисования
-                        graf.FillEllipse(redBrush, e.X, e.Y, 10, 10);
+                        graf.FillEllipse(redBrush, e.X, e.Y, 10, 10);//рисование на изображении
                     }
-                    pictureBox1.Image = b;
-                   // pictureBox1.Invalidate();
+                    pictureBox1.Image = b; //преобразование изображения
                     
             
         }
@@ -173,20 +153,17 @@ namespace NeuronNets
         private void Clear_Click(object sender, EventArgs e)
         {
             
-            pictureBox1.Invalidate();
+            pictureBox1.Invalidate(); // перерисовка
             if(!prov) graf.Clear(Color.White); //очистка изображения
-            prov = true;
+            prov = true; // пустое изображение
             yotv.Text = "";
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e) //преобразование изображения в Текст боксы  
         {
             Bitmap savedBit = new Bitmap(pictureBox1.Width, pictureBox1.Height);//преобразования рисунка в изображение
             pictureBox1.DrawToBitmap(savedBit, pictureBox1.ClientRectangle);
             
-           // Color pixelColor = savedBit.GetPixel(50, 50);
-           // pictureBox1.Invalidate();
-            //graf.Clear(pixelColor);
 
             for (int y=0, j=2; y < 30; y++)
             {
