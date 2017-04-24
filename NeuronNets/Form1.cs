@@ -291,38 +291,66 @@ namespace NeuronNets
 
         private void button3_Click(object sender, EventArgs e) // save xml file
         {
-            XmlTextWriter save = new XmlTextWriter(@"d:\programs\GIT_C#\NeuronNets\nets.xml", Encoding.UTF8);
+            SaveFileDialog directory = new SaveFileDialog();
+            directory.Filter  ="Setting Neuron Nets (*.snn)|*.snn";
+            directory.FileName = "nets.snn";
 
-            // create xml file // {
-            save.WriteStartElement("project"); save.WriteString("\n");//   <project>   /// open and start write file
-            //xml
-             save.WriteStartElement("body");//  <body>
-            for (int i = 0; i < 30 ; i++)
+            if (directory.ShowDialog() == DialogResult.OK)
             {
-                for (int j = 0; j < 30; j++)
-                    save.WriteAttributeString("W_"+i+"_"+j,Convert.ToString(W[i, j]));
+                XmlTextWriter save = new XmlTextWriter(directory.FileName, Encoding.UTF8);
+
+                // create xml file // {
+                save.WriteStartElement("project"); save.WriteString("\n");//   <project>   /// open and start write file
+                                                                          //xml
+                save.WriteStartElement("body");//  <body>
+                for (int i = 0; i < 30; i++)
+                {
+                    for (int j = 0; j < 30; j++)
+                        save.WriteAttributeString("W_" + i + "_" + j, Convert.ToString(W[i, j]));
+                }
+                save.WriteEndElement();//  <body>
+                                       //xml
+                save.WriteEndElement();//  </project>  /// close last an element
+                save.Close(); // save and close file 
+                              // finish xml file // }
             }
-            save.WriteEndElement();//  <body>
-            //xml
-            save.WriteEndElement();//  </project>  /// close last an element
-            save.Close(); // save and close file 
-            // finish xml file // }
         }
 
         private void open_Click(object sender, EventArgs e) //open
         {
-            XmlTextReader open = new XmlTextReader(@"d:\programs\GIT_C#\NeuronNets\nets.xml"); //open xml file
-            //int i = 0, j = 0;
-            while (open.Read())
+            OpenFileDialog directory = new OpenFileDialog();
+            directory.Filter = "Setting Neuron Nets (*.snn)|*.snn";
+            directory.FileName = "nets.snn";
+            if (directory.ShowDialog() == DialogResult.OK)
             {
-                if (open.Name == "body")
+                XmlTextReader open = new XmlTextReader(directory.FileName); //open xml file
+                                                                                                   //int i = 0, j = 0;
+                while (open.Read())
+                {
+                    if (open.Name == "body")
+                    {
+                        for (int i = 0; i < 30; i++)
+                            for (int j = 0; j < 30; j++)
+                                W[i, j] = Convert.ToDouble(open.GetAttribute("W_" + i + "_" + j));// input nets sittings
+                    }
+                }
+
+                // вывод значения персептронов // {
+                for (int j = 0; j < 30; j++)
                 {
                     for (int i = 0; i < 30; i++)
-                        for (int j = 0; j < 30; j++)
-                            W[i,j] = Convert.ToDouble(open.GetAttribute("W_" + i + "_" + j)) ;
-
+                    {
+                        tb[i, j].Text = Convert.ToString(W[i, j]);
+                        if (checkBox2.Checked == true) //проверка чек бокса на цвет
+                            if (W[i, j] > 0.5)
+                                tb[i, j].BackColor = Color.Green;
+                            else if (W[i, j] < 0.3) tb[i, j].BackColor = Color.Red; else tb[i, j].BackColor = Color.White; ;
+                    }
                 }
+                // вывод значения персептронов // }
             }
         }
+
+
     }
 }

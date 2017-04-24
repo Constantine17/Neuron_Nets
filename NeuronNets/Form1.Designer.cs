@@ -179,21 +179,21 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(45, 366);
+            this.button3.Location = new System.Drawing.Point(12, 588);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(231, 23);
             this.button3.TabIndex = 18;
-            this.button3.Text = "button3";
+            this.button3.Text = "Сохратить настройки сети";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // open
             // 
-            this.open.Location = new System.Drawing.Point(155, 365);
+            this.open.Location = new System.Drawing.Point(12, 617);
             this.open.Name = "open";
-            this.open.Size = new System.Drawing.Size(75, 23);
+            this.open.Size = new System.Drawing.Size(231, 23);
             this.open.TabIndex = 19;
-            this.open.Text = "open";
+            this.open.Text = "Загрузить настройки сети";
             this.open.UseVisualStyleBackColor = true;
             this.open.Click += new System.EventHandler(this.open_Click);
             // 
