@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace NeuronNets
 {
@@ -56,7 +57,7 @@ namespace NeuronNets
                         Text = "0.5",
                         Size = new Size(24, 20)
                     };
-                    this.groupBox1.Controls.Add(tb[i, j]);
+                    this.save.Controls.Add(tb[i, j]);
                     x += 25;
                 }
                 x = 7; y += 20;
@@ -287,7 +288,41 @@ namespace NeuronNets
         {
 
         }
-        
 
+        private void button3_Click(object sender, EventArgs e) // save xml file
+        {
+            XmlTextWriter save = new XmlTextWriter(@"d:\programs\GIT_C#\NeuronNets\nets.xml", Encoding.UTF8);
+
+            // create xml file // {
+            save.WriteStartElement("project"); save.WriteString("\n");//   <project>   /// open and start write file
+            //xml
+             save.WriteStartElement("body");//  <body>
+            for (int i = 0; i < 30 ; i++)
+            {
+                for (int j = 0; j < 30; j++)
+                    save.WriteAttributeString("W_"+i+"_"+j,Convert.ToString(W[i, j]));
+            }
+            save.WriteEndElement();//  <body>
+            //xml
+            save.WriteEndElement();//  </project>  /// close last an element
+            save.Close(); // save and close file 
+            // finish xml file // }
+        }
+
+        private void open_Click(object sender, EventArgs e) //open
+        {
+            XmlTextReader open = new XmlTextReader(@"d:\programs\GIT_C#\NeuronNets\nets.xml"); //open xml file
+            //int i = 0, j = 0;
+            while (open.Read())
+            {
+                if (open.Name == "body")
+                {
+                    for (int i = 0; i < 30; i++)
+                        for (int j = 0; j < 30; j++)
+                            W[i,j] = Convert.ToDouble(open.GetAttribute("W_" + i + "_" + j)) ;
+
+                }
+            }
+        }
     }
 }
