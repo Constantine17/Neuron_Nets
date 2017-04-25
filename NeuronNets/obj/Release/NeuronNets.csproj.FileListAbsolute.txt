@@ -14,3 +14,4 @@ D:\programs\GIT_C#\NeuronNets\NeuronNets\bin\Release\NeuronNets.pdb
 D:\programs\GIT_C#\NeuronNets\NeuronNets\obj\Release\NeuronNets.Form1.resources
 D:\programs\GIT_C#\NeuronNets\NeuronNets\obj\Release\NeuronNets.Properties.Resources.resources
 D:\programs\GIT_C#\NeuronNets\NeuronNets\obj\Release\NeuronNets.csproj.GenerateResource.Cache
+D:\programs\GIT_C#\NeuronNets\NeuronNets\obj\Release\NeuronNets.csprojResolveAssemblyReference.cache
